@@ -10,9 +10,8 @@ using System.Collections.Generic;
 
 //using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Cimforce_HTTP_auto_script;
 
-namespace API_Test
+namespace Cimforce_HTTP_auto_script
 {
     class Program
     {
