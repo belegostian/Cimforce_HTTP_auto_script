@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace API_Test
 {
     //CNC 取得機台狀態
-    internal class Response_statusInfo
+    internal class Response_StatusInfo
     {
         [JsonPropertyName("errorInfo")]
         public string ErrorInfo { get; set; }
