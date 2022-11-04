@@ -44,8 +44,38 @@ namespace Cimforce_HTTP_auto_script
         public string Status { get; set; }
     }
 
-    /*******************************************************************************************************/
+    /*讀取刀具補正******************************************************************************************/
+    public class Response_ReadToolOofset
+    {
+        [JsonPropertyName("errorInfo")]
+        public string errorInfo { get; set; }
 
+        [JsonPropertyName("resultCode")]
+        public int resultCode { get; set; }
+
+        [JsonPropertyName("toolInfo")]
+        public ToolInfo toolInfo { get; set; }
+    }
+
+    public class ToolInfo
+    {
+        [JsonPropertyName("toolOffsets")]
+        public List<ToolOffset> toolOffsets { get; set; }
+
+        [JsonPropertyName("toolTitle")]
+        public List<string> toolTitle { get; set; }
+    }
+
+    public class ToolOffset
+    {
+        [JsonPropertyName("No")]
+        public int No { get; set; }
+
+        [JsonPropertyName("Value")]
+        public List<double> Value { get; set; }
+    }
+
+    /*******************************************************************************************************/
     internal partial class Response_General
     {
         [JsonPropertyName("errorInfo")]
@@ -54,6 +84,4 @@ namespace Cimforce_HTTP_auto_script
         [JsonPropertyName("resultCode")]
         public long ResultCode { get; set; }
     }
-
 }
-
