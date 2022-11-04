@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Cimforce_HTTP_auto_script
 {
-    //CNC 取得機台狀態
+    /*請求機台狀態******************************************************************************************/
     internal class Response_StatusInfo
     {
         [JsonPropertyName("errorInfo")]
@@ -44,7 +44,8 @@ namespace Cimforce_HTTP_auto_script
         public string Status { get; set; }
     }
 
-    //CNC 下載加工檔、上傳本地端加工檔、指定加工檔
+    /*******************************************************************************************************/
+
     internal partial class Response_General
     {
         [JsonPropertyName("errorInfo")]

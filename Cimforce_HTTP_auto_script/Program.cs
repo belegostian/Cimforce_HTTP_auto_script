@@ -10,6 +10,7 @@ using System.Collections.Generic;
 
 //using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.ComponentModel.DataAnnotations;
 
 namespace Cimforce_HTTP_auto_script
 {
@@ -26,9 +27,12 @@ namespace Cimforce_HTTP_auto_script
             //指令參數初始化
             string name = "MV66A";
             int sysnum = 1;
+
             string nc_name = "O6666";
             string local_path = "C:\\Users\\b0630\\Desktop\\MV66A_nc_file";
             string remote_path = "";
+
+
 
 
             /*請求機台狀態******************************************************************************************/
@@ -87,6 +91,28 @@ namespace Cimforce_HTTP_auto_script
             Generic<Request_UploadLocalNCFile, Response_General> upload_nc_file = 
                 new Generic<Request_UploadLocalNCFile, Response_General>();
             var repo_ulnf = await upload_nc_file.ConnectTask(req_ulnf, "uploadNCToMemory1", client);
+
+
+            /*寫入PMC-Cycle Start***********************************************************************************/
+            var req_wp = new Request_WritePMC1
+            {
+                Name = name,
+                SystemNum = sysnum,
+                PMC =
+                {
+                    adr_type = 12,
+                    Id = 9008,
+                    BitIndex = 1,
+                    BitValue = 1,
+                },
+            };
+            Generic<Request_WritePMC1, Response_General> write_pmc =
+                new Generic<Request_WritePMC1, Response_General>();
+            var repo_wp = await write_pmc.ConnectTask(req_wp, "fanuc/setPMCInfo2", client);
+
+
+
+
         }
     }
 }
