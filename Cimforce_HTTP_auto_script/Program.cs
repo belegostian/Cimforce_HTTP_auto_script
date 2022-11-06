@@ -108,22 +108,67 @@ namespace Cimforce_HTTP_auto_script
             var repo_cs = await cycle_start.ConnectTask(req_cs, "start", client);
 
 
-            /*寫入PMC-Cycle Start***********************************************************************************/
-            var req_wp = new Request_WritePMC1
+            /*讀取PMC-Multi Addr***********************************************************************************/
+            var req_rmp = new Request_ReadMultiPMC
+            {
+                Name = name,
+                SystemNum = sysnum,
+                pmc =
+                {
+                    // E type
+                    adr_type = 12,
+
+                    data_type = 0,
+                    startNum = 9008,
+                    endNum = 9008
+                },
+            };
+            Generic<Request_ReadMultiPMC, Response_ReadMultiPMC> read_multi_pmc =
+                new Generic<Request_ReadMultiPMC, Response_ReadMultiPMC>();
+            var repo_rmp = await read_multi_pmc.ConnectTask(req_rmp, "fanuc/setPMCInfo2", client);
+
+
+            /*寫入PMC-Single Addr***********************************************************************************/
+            var req_wsp = new Request_WriteSinglePMC
             {
                 Name = name,
                 SystemNum = sysnum,
                 PMC =
                 {
                     adr_type = 12,
+
+                    //Cycle Start
                     Id = 9008,
+
                     BitIndex = 1,
-                    BitValue = 1,
+                    BitValue = 1
                 },
             };
-            Generic<Request_WritePMC1, Response_General> write_pmc =
-                new Generic<Request_WritePMC1, Response_General>();
-            var repo_wp = await write_pmc.ConnectTask(req_wp, "fanuc/setPMCInfo2", client);
+            Generic<Request_WriteSinglePMC, Response_General> write_single_pmc =
+                new Generic<Request_WriteSinglePMC, Response_General>();
+            var repo_wsp = await write_single_pmc.ConnectTask(req_wsp, "fanuc/setPMCInfo2", client);
+
+
+            /*寫入PMC-Multi Addr***********************************************************************************/
+            var req_wmp = new Request_WriteMultiPMC
+            {
+                Name = name,
+                SystemNum = sysnum,
+                pmcInfo =
+                {
+                    adr_type = 12,
+                    data_type = 0,
+                    startNum = 9008,
+                    endNum = 9008,
+                    pmc = 
+                    { 
+                        new Pmc_req() { id = 9008, value = 1 } 
+                    }
+                },
+            };
+            Generic<Request_WriteMultiPMC, Response_General> write_multi_pmc =
+                new Generic<Request_WriteMultiPMC, Response_General>();
+            var repo_wmp = await write_multi_pmc.ConnectTask(req_wmp, "fanuc/setPMCInfo2", client);
 
 
             /*讀取刀具捕正******************************************************************************************/

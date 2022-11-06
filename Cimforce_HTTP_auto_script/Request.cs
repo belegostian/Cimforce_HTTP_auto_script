@@ -65,8 +65,35 @@ namespace Cimforce_HTTP_auto_script
         public string RemotePath { get; set; }
     }
 
-    /*寫入PMC1**********************************************************************************************/
-    internal class Request_WritePMC1
+    /*讀取PMC-Multi Addr************************************************************************************/
+    internal class Request_ReadMultiPMC
+    {
+        [JsonPropertyName("Name")]
+        public string Name { get; set; }
+
+        [JsonPropertyName("SystemNum")]
+        public int SystemNum { get; set; }
+
+        [JsonPropertyName("pmc")]
+        public Pmc pmc { get; set; }
+    }
+    public class Pmc
+    {
+        [JsonPropertyName("adr_type")]
+        public int adr_type { get; set; }
+
+        [JsonPropertyName("data_type")]
+        public int data_type { get; set; }
+
+        [JsonPropertyName("startNum")]
+        public int startNum { get; set; }
+
+        [JsonPropertyName("endNum")]
+        public int endNum { get; set; }
+    }
+
+    /*寫入PMC-Single Addr***********************************************************************************/
+    internal class Request_WriteSinglePMC
     {
         [JsonPropertyName("PMC")]
         public PMC PMC { get; set; }
@@ -92,8 +119,8 @@ namespace Cimforce_HTTP_auto_script
         public int BitValue { get; set; }
     }
 
-    /*寫入PMC2**********************************************************************************************/
-    internal class Request_WritePMC2
+    /*寫入PMC-Multi Addr***********************************************************************************/
+    internal class Request_WriteMultiPMC
     {
         [JsonPropertyName("pmcInfo")]
         public PmcInfo pmcInfo { get; set; }
@@ -119,9 +146,9 @@ namespace Cimforce_HTTP_auto_script
         public int endNum { get; set; }
 
         [JsonPropertyName("pmc")]
-        public List<Pmc> pmc { get; set; }
+        public List<Pmc_req> pmc { get; set; }
     }
-    internal class Pmc // 引入格式pmc = { new Pmc() { id = 9008, value = 1 } }
+    internal class Pmc_req // 引入格式pmc = { new Pmc() { id = 9008, value = 1 } }
     {
         [JsonPropertyName("id")]
         public int id { get; set; }

@@ -76,6 +76,24 @@ namespace Cimforce_HTTP_auto_script
     }
 
     /*******************************************************************************************************/
+    internal partial class Response_ReadMultiPMC
+    {
+        [JsonPropertyName("errorInfo")]
+        public string ErrorInfo { get; set; }
+
+        [JsonPropertyName("pmc")]
+        public List<Pmc_rep> pmc { get; set; }
+
+        [JsonPropertyName("resultCode")]
+        public long ResultCode { get; set; }
+    }
+    public class Pmc_rep
+    {
+        public int id { get; set; }
+        public int value { get; set; }
+    }
+
+    /*******************************************************************************************************/
     internal partial class Response_General
     {
         [JsonPropertyName("errorInfo")]
