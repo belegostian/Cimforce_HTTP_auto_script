@@ -45,7 +45,7 @@ namespace Cimforce_HTTP_auto_script
     }
 
     /*讀取刀具補正******************************************************************************************/
-    public class Response_ReadToolOofset
+    internal class Response_ReadToolOofset
     {
         [JsonPropertyName("errorInfo")]
         public string errorInfo { get; set; }
@@ -57,7 +57,7 @@ namespace Cimforce_HTTP_auto_script
         public ToolInfo toolInfo { get; set; }
     }
 
-    public class ToolInfo
+    internal partial class ToolInfo
     {
         [JsonPropertyName("toolOffsets")]
         public List<ToolOffset> toolOffsets { get; set; }
@@ -66,13 +66,55 @@ namespace Cimforce_HTTP_auto_script
         public List<string> toolTitle { get; set; }
     }
 
-    public class ToolOffset
+    internal partial class ToolOffset
     {
         [JsonPropertyName("No")]
         public int No { get; set; }
 
         [JsonPropertyName("Value")]
         public List<double> Value { get; set; }
+    }
+
+    /*讀取PMC-Multi Addr***********************************************************************************/
+    internal class Response_ReadMultiPMC
+    {
+        [JsonPropertyName("errorInfo")]
+        public string ErrorInfo { get; set; }
+
+        [JsonPropertyName("pmc")]
+        public List<Pmc_rep> pmc { get; set; }
+
+        [JsonPropertyName("resultCode")]
+        public long ResultCode { get; set; }
+    }
+    internal partial class Pmc_rep
+    {
+        public int id { get; set; }
+        public int value { get; set; }
+    }
+
+    /*讀取Macro********************************************************************************************/
+    internal class Response_ReadMacro
+    {
+        [JsonPropertyName("errorInfo")]
+        public string ErrorInfo { get; set; }
+
+        [JsonPropertyName("Macros")]
+        public List<FanucMacro> Macros { get; set; }
+
+        [JsonPropertyName("resultCode")]
+        public long ResultCode { get; set; }
+    }
+    internal partial class FanucMacro
+    {
+        [JsonPropertyName("Id")]
+        public int Id { get; set; }
+
+        [JsonPropertyName("Value")]
+        public double Value { get; set; }
+
+        [JsonPropertyName("Empty")]
+        public bool Empty { get; set; }
     }
 
     /*******************************************************************************************************/
