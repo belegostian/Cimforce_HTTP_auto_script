@@ -108,6 +108,24 @@ namespace Cimforce_HTTP_auto_script
             var repo_cs = await cycle_start.ConnectTask(req_cs, "start", client);
 
 
+            /*寫入PMC-Cycle Start***********************************************************************************/
+            var req_wp = new Request_WritePMC1
+            {
+                Name = name,
+                SystemNum = sysnum,
+                PMC =
+                {
+                    adr_type = 12,
+                    Id = 9008,
+                    BitIndex = 1,
+                    BitValue = 1,
+                },
+            };
+            Generic<Request_WritePMC1, Response_General> write_pmc =
+                new Generic<Request_WritePMC1, Response_General>();
+            var repo_wp = await write_pmc.ConnectTask(req_wp, "fanuc/setPMCInfo2", client);
+
+
             /*讀取刀具捕正******************************************************************************************/
             var req_rto = new Request_General
             {
