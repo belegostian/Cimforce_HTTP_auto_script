@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Cimforce_HTTP_auto_script
 {
     /*請求機台狀態******************************************************************************************/
-    internal class Request_General
+    public class Request_General
     {
         [JsonPropertyName("Name")]
         public string Name { get; set; }
@@ -18,7 +18,7 @@ namespace Cimforce_HTTP_auto_script
     }
 
     /*指定加工主程式****************************************************************************************/
-    internal class Request_SpecifyNCFile
+    public class Request_SpecifyNCFile
     {
         [JsonPropertyName("Name")]
         public string Name { get; set; }
@@ -31,7 +31,7 @@ namespace Cimforce_HTTP_auto_script
     }
 
     /*上傳、下載CNC加工檔 (限本地記憶體)********************************************************************/
-    internal class Request_loadLocalNCFile
+    public class Request_loadLocalNCFile
     {
         [JsonPropertyName("Name")]
         public string Name { get; set; }
@@ -50,7 +50,7 @@ namespace Cimforce_HTTP_auto_script
     }
 
     /*開始加工**********************************************************************************************/
-    internal class Request_CycleStart
+    public class Request_CycleStart
     {
         [JsonPropertyName("Name")]
         public string Name { get; set; }
@@ -66,7 +66,7 @@ namespace Cimforce_HTTP_auto_script
     }
 
     /*寫入刀具捕正******************************************************************************************/
-    internal class Request_WriteToolOofset
+    public class Request_WriteToolOofset
     {
         [JsonPropertyName("toolTitle")]
         public List<string> toolTitle { get; set; }
@@ -86,7 +86,7 @@ namespace Cimforce_HTTP_auto_script
         [JsonPropertyName("EndNo")]
         public int EndNo { get; set; }
     }
-    internal partial class Tool
+    public partial class Tool
     {
         [JsonPropertyName("Value")]
         public List<double> Value { get; set; }
@@ -96,7 +96,7 @@ namespace Cimforce_HTTP_auto_script
     }
 
     /*讀取PMC-Multi Addr************************************************************************************/
-    internal class Request_ReadMultiPMC
+    public class Request_ReadMultiPMC
     {
         [JsonPropertyName("Name")]
         public string Name { get; set; }
@@ -123,7 +123,7 @@ namespace Cimforce_HTTP_auto_script
     }
 
     /*寫入PMC-Single Addr***********************************************************************************/
-    internal class Request_WriteSinglePMC
+    public class Request_WriteSinglePMC
     {
         [JsonPropertyName("PMC")]
         public PMC PMC { get; set; }
@@ -134,7 +134,7 @@ namespace Cimforce_HTTP_auto_script
         [JsonPropertyName("SystemNum")]
         public int SystemNum { get; set; }
     }
-    internal partial class PMC
+    public partial class PMC
     {
         [JsonPropertyName("adr_type")]
         public int adr_type { get; set; }
@@ -150,7 +150,7 @@ namespace Cimforce_HTTP_auto_script
     }
 
     /*寫入PMC-Multi Addr***********************************************************************************/
-    internal class Request_WriteMultiPMC
+    public class Request_WriteMultiPMC
     {
         [JsonPropertyName("pmcInfo")]
         public PmcInfo pmcInfo { get; set; }
@@ -161,7 +161,7 @@ namespace Cimforce_HTTP_auto_script
         [JsonPropertyName("SystemNum")]
         public int SystemNum { get; set; }
     }
-    internal partial class PmcInfo
+    public partial class PmcInfo
     {
         [JsonPropertyName("adr_type")]
         public int adr_type { get; set; }
@@ -178,7 +178,7 @@ namespace Cimforce_HTTP_auto_script
         [JsonPropertyName("pmc")]
         public List<Pmc_req> pmc { get; set; }
     }
-    internal partial class Pmc_req // 引入格式pmc = { new Pmc() { id = 9008, value = 1 } }
+    public partial class Pmc_req // 引入格式pmc = { new Pmc() { id = 9008, value = 1 } }
     {
         [JsonPropertyName("id")]
         public int id { get; set; }
@@ -188,7 +188,7 @@ namespace Cimforce_HTTP_auto_script
     }
 
     /*讀取Macro********************************************************************************************/
-    internal class Request_ReadMacro
+    public class Request_ReadMacro
     {
         [JsonPropertyName("Name")]
         public string Name { get; set; }
@@ -204,7 +204,7 @@ namespace Cimforce_HTTP_auto_script
     }
 
     /*寫入Macro********************************************************************************************/
-    internal class Request_WriteMacro
+    public class Request_WriteMacro
     {
         [JsonPropertyName("Name")]
         public string Name { get; set; }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Cimforce_HTTP_auto_script
 {
-    public class Generic<T, U>
+    public class Connect<T, U>
     {
         public async Task<U> ConnectTask(T req, string cmd_dir, HttpClient client)
         {

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Cimforce_HTTP_auto_script
 {
     /*請求機台狀態******************************************************************************************/
-    internal class Response_StatusInfo
+    public class Response_StatusInfo
     {
         [JsonPropertyName("errorInfo")]
         public string ErrorInfo { get; set; }
@@ -20,7 +20,7 @@ namespace Cimforce_HTTP_auto_script
         [JsonPropertyName("resultCode")]
         public long ResultCode { get; set; }
     }
-    internal partial class MachStatus
+    public class MachStatus
     {
         [JsonPropertyName("alarm")]
         public bool Alarm { get; set; }
@@ -45,7 +45,7 @@ namespace Cimforce_HTTP_auto_script
     }
 
     /*讀取刀具補正******************************************************************************************/
-    internal class Response_ReadToolOofset
+    public class Response_ReadToolOofset
     {
         [JsonPropertyName("errorInfo")]
         public string errorInfo { get; set; }
@@ -57,7 +57,7 @@ namespace Cimforce_HTTP_auto_script
         public ToolInfo toolInfo { get; set; }
     }
 
-    internal partial class ToolInfo
+    public partial class ToolInfo
     {
         [JsonPropertyName("toolOffsets")]
         public List<ToolOffset> toolOffsets { get; set; }
@@ -66,7 +66,7 @@ namespace Cimforce_HTTP_auto_script
         public List<string> toolTitle { get; set; }
     }
 
-    internal partial class ToolOffset
+    public partial class ToolOffset
     {
         [JsonPropertyName("No")]
         public int No { get; set; }
@@ -76,7 +76,7 @@ namespace Cimforce_HTTP_auto_script
     }
 
     /*讀取PMC-Multi Addr***********************************************************************************/
-    internal class Response_ReadMultiPMC
+    public class Response_ReadMultiPMC
     {
         [JsonPropertyName("errorInfo")]
         public string ErrorInfo { get; set; }
@@ -87,14 +87,14 @@ namespace Cimforce_HTTP_auto_script
         [JsonPropertyName("resultCode")]
         public long ResultCode { get; set; }
     }
-    internal partial class Pmc_rep
+    public partial class Pmc_rep
     {
         public int id { get; set; }
         public int value { get; set; }
     }
 
     /*讀取Macro********************************************************************************************/
-    internal class Response_ReadMacro
+    public class Response_ReadMacro
     {
         [JsonPropertyName("errorInfo")]
         public string ErrorInfo { get; set; }
@@ -105,7 +105,7 @@ namespace Cimforce_HTTP_auto_script
         [JsonPropertyName("resultCode")]
         public long ResultCode { get; set; }
     }
-    internal partial class FanucMacro
+    public partial class FanucMacro
     {
         [JsonPropertyName("Id")]
         public int Id { get; set; }
@@ -118,25 +118,7 @@ namespace Cimforce_HTTP_auto_script
     }
 
     /*******************************************************************************************************/
-    internal partial class Response_ReadMultiPMC
-    {
-        [JsonPropertyName("errorInfo")]
-        public string ErrorInfo { get; set; }
-
-        [JsonPropertyName("pmc")]
-        public List<Pmc_rep> pmc { get; set; }
-
-        [JsonPropertyName("resultCode")]
-        public long ResultCode { get; set; }
-    }
-    public class Pmc_rep
-    {
-        public int id { get; set; }
-        public int value { get; set; }
-    }
-
-    /*******************************************************************************************************/
-    internal partial class Response_General
+    public partial class Response_General
     {
         [JsonPropertyName("errorInfo")]
         public string ErrorInfo { get; set; }
