@@ -73,11 +73,14 @@ namespace Cimforce_HTTP_auto_script
             //下載CNC加工檔 (限本地記憶體)
             var repo_dlnf = fcns.DownloadLocalNCFile(name, sysnum, local_path, remote_path, nc_name, client);
 
+            //刪除CNC加工檔 (限本地記憶體)
+            var repo_dnf = fcns.DeleteLocalNCFile(name, sysnum, remote_path, nc_name, client);
+
             //上傳PC加工檔 (限本地記憶體)
             var repo_ulnf = fcns.UploadLocalNCFile(name, sysnum, local_path, remote_path, nc_name, client);
 
             //指定加工主程式
-            var repo_snf = fcns.SpecifyNCFile(name, sysnum, nc_name, client);
+            var repo_snf = fcns.SpecifyNCFile(name, sysnum, remote_path, nc_name, client);
 
             //開始加工
             var repo_cs = fcns.CycleStart(name, sysnum, nc_name, remote_path, client);

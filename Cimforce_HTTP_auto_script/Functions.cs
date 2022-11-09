@@ -45,6 +45,21 @@ namespace Cimforce_HTTP_auto_script
             return await download_nc_file.ConnectTask(req_dlnf, "downloadNCFromMemory1", client);
         }
 
+        /*刪除CNC加工檔 (限本地記憶體)**************************************************************************/
+        public async Task<Response_General> DeleteLocalNCFile(string name, int sysnum, string remote_path, string nc_name, HttpClient client)
+        {
+            var req_dnf = new Request_SpecifyNCFile
+            {
+                Name = name,
+                SystemNum = sysnum,
+                RemotePath = remote_path,
+                NCName = nc_name
+            };
+            Connect<Request_SpecifyNCFile, Response_General> delete_nc_file =
+                new Connect<Request_SpecifyNCFile, Response_General>();
+            return await delete_nc_file.ConnectTask(req_dnf, "deleteNCInMemory", client);
+        }
+
         /*上傳PC加工檔 (限本地記憶體)***************************************************************************/
         public async Task<Response_General> UploadLocalNCFile
             (string name, int sysnum, string local_path, string remote_path, string nc_name, HttpClient client)
@@ -64,13 +79,14 @@ namespace Cimforce_HTTP_auto_script
 
         /*指定加工主程式****************************************************************************************/
         public async Task<Response_General> SpecifyNCFile
-            (string name, int sysnum, string nc_name, HttpClient client)
+            (string name, int sysnum, string nc_name, string remote_path, HttpClient client)
         {
             var req_snf = new Request_SpecifyNCFile
             {
                 Name = name,
                 SystemNum = sysnum,
-                NCName = nc_name
+                NCName = nc_name,
+                RemotePath = remote_path
             };
             Connect<Request_SpecifyNCFile, Response_General> specify_nc_file =
                 new Connect<Request_SpecifyNCFile, Response_General>();
@@ -173,7 +189,8 @@ namespace Cimforce_HTTP_auto_script
         }
 
         /*讀取MACRO********************************************************************************************/
-        public async Task<Response_ReadMacro> ReadMacro(string name, int sysnum, int start_id, int end_id, HttpClient client)
+        public async Task<Response_ReadMacro> ReadMacro
+            (string name, int sysnum, int start_id, int end_id, HttpClient client)
         {
             var req_rm = new Request_ReadMacro
             {
@@ -188,7 +205,8 @@ namespace Cimforce_HTTP_auto_script
         }
 
         /*寫入MACRO********************************************************************************************/
-        public async Task<Response_General> WriteMacro(string name, int sysnum, List<FanucMacro> macro_list_sample, HttpClient client)
+        public async Task<Response_General> WriteMacro
+            (string name, int sysnum, List<FanucMacro> macro_list_sample, HttpClient client)
         {
             var req_wm = new Request_WriteMacro
             {

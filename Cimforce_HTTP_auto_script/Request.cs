@@ -18,13 +18,16 @@ namespace Cimforce_HTTP_auto_script
     }
 
     /*指定加工主程式****************************************************************************************/
-    public class Request_SpecifyNCFile
+    public class Request_SpecifyNCFile  //與刪除加工程式功能共用
     {
         [JsonPropertyName("Name")]
         public string Name { get; set; }
 
         [JsonPropertyName("SystemNum")]
         public int SystemNum { get; set; }
+
+        [JsonPropertyName("RemotePath")]
+        public string RemotePath { get; set; }
 
         [JsonPropertyName("NCName")]
         public string NCName { get; set; }
