@@ -65,6 +65,22 @@ namespace Cimforce_HTTP_auto_script
         public string RemotePath { get; set; }
     }
 
+    /*讀取刀具捕正******************************************************************************************/
+    public class Request_ReadToolOofset
+    {
+        [JsonPropertyName("Name")]
+        public string Name { get; set; }
+
+        [JsonPropertyName("SystemNum")]
+        public int SystemNum { get; set; }
+
+        [JsonPropertyName("StartNo")]
+        public int StartNo { get; set; }
+
+        [JsonPropertyName("EndNo")]
+        public int EndNo { get; set; }
+    }
+
     /*寫入刀具捕正******************************************************************************************/
     public class Request_WriteToolOofset
     {
@@ -104,10 +120,10 @@ namespace Cimforce_HTTP_auto_script
         [JsonPropertyName("SystemNum")]
         public int SystemNum { get; set; }
 
-        [JsonPropertyName("pmc")]
-        public Pmc pmc { get; set; }
+        [JsonPropertyName("pmc")]  //已確認
+        public rPMC pmc { get; set; }
     }
-    public partial class Pmc
+    public partial class rPMC
     {
         [JsonPropertyName("adr_type")]
         public int adr_type { get; set; }
@@ -125,8 +141,8 @@ namespace Cimforce_HTTP_auto_script
     /*寫入PMC-Single Addr***********************************************************************************/
     public class Request_WriteSinglePMC
     {
-        [JsonPropertyName("PMC")]
-        public PMC PMC { get; set; }
+        [JsonPropertyName("PMC")]  //已確認
+        public sPMC PMC { get; set; }
 
         [JsonPropertyName("Name")]
         public string Name { get; set; }
@@ -134,7 +150,7 @@ namespace Cimforce_HTTP_auto_script
         [JsonPropertyName("SystemNum")]
         public int SystemNum { get; set; }
     }
-    public partial class PMC
+    public partial class sPMC
     {
         [JsonPropertyName("adr_type")]
         public int adr_type { get; set; }
@@ -175,10 +191,10 @@ namespace Cimforce_HTTP_auto_script
         [JsonPropertyName("endNum")]
         public int endNum { get; set; }
 
-        [JsonPropertyName("pmc")]
-        public List<Pmc_req> pmc { get; set; }
+        [JsonPropertyName("pmc")]  //已確認
+        public List<wPmc> pmc { get; set; }
     }
-    public partial class Pmc_req // 引入格式pmc = { new Pmc() { id = 9008, value = 1 } }
+    public partial class wPmc // 引入格式pmc = { new Pmc() { id = 9008, value = 1 } }
     {
         [JsonPropertyName("id")]
         public int id { get; set; }

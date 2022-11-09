@@ -89,7 +89,10 @@ namespace Cimforce_HTTP_auto_script
     }
     public partial class Pmc_rep
     {
+        [JsonPropertyName("id")]
         public int id { get; set; }
+
+        [JsonPropertyName("value")]
         public int value { get; set; }
     }
 
