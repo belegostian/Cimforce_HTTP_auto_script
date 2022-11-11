@@ -90,7 +90,8 @@ namespace Cimforce_HTTP_auto_script
 
                 // Buffer for reading data
                 Byte[] bytes = new Byte[1024];
-                String data = null;
+                String socket_req = null;
+                String socket_repo = null;
 
                 // Enter the listening loop.
                 while (true)
@@ -107,23 +108,23 @@ namespace Cimforce_HTTP_auto_script
                     while ((str_len = stream.Read(bytes, 0, bytes.Length)) != 0)
                     {
                         // Translate data bytes to a ASCII string.
-                        data = Encoding.ASCII.GetString(bytes, 0, str_len);
-                        Console.WriteLine("Received: {0}", data);
+                        socket_req = Encoding.ASCII.GetString(bytes, 0, str_len);
+                        Console.WriteLine("Received: {0}", socket_req);
 
                         // Excute functions by receive data
-                        if (data == "disconnect")
+                        if (socket_req == "disconnect")
                         {
                             break;
                         }
 
                         Functions fcns = new Functions();
-                        switch (data)
+                        switch (socket_req)
                         {
                             case "status info":
                                 try
                                 {
                                     var repo_si = fcns.StatusInfo(name, sysnum, _cnc_client);
-                                    data = "execute function: status info\n" + "result code: " + repo_si.Result.ResultCode;
+                                    socket_repo = "execute function: status info\n" + "result code: " + repo_si.Result.ResultCode;
                                 }
                                 catch (Exception e)
                                 {
@@ -134,8 +135,12 @@ namespace Cimforce_HTTP_auto_script
                             case "download nc file":
                                 try
                                 {
-                                    var repo_dlnf = fcns.DownloadLocalNCFile(name, sysnum, local_path, remote_path, nc_name, _cnc_client);
-                                    data = "execute function: download nc file\n" + "result code: " + repo_dlnf.Result.ResultCode;
+                                    stream.Write(Encoding.ASCII.GetBytes("enter nc file name\n"), 0, Encoding.ASCII.GetBytes("enter nc file name\n").Length);
+                                    str_len = stream.Read(bytes, 0, bytes.Length);
+                                    socket_req = Encoding.ASCII.GetString(bytes, 0, str_len);
+
+                                    var repo_dlnf = fcns.DownloadLocalNCFile(name, sysnum, local_path, remote_path, socket_req, _cnc_client);
+                                    socket_repo = "execute function: download nc file\n" + "result code: " + repo_dlnf.Result.ResultCode;
                                 }
                                 catch (Exception e)
                                 {
@@ -146,8 +151,12 @@ namespace Cimforce_HTTP_auto_script
                             case "delete nc file":
                                 try
                                 {
+                                    stream.Write(Encoding.ASCII.GetBytes("enter nc file name\n"), 0, Encoding.ASCII.GetBytes("enter nc file name\n").Length);
+                                    str_len = stream.Read(bytes, 0, bytes.Length);
+                                    socket_req = Encoding.ASCII.GetString(bytes, 0, str_len);
+
                                     var repo_dnf = fcns.DeleteLocalNCFile(name, sysnum, remote_path, nc_name, _cnc_client);
-                                    data = "execute function: delete nc file\n" + "result code: " + repo_dnf.Result.ResultCode;
+                                    socket_repo = "execute function: delete nc file\n" + "result code: " + repo_dnf.Result.ResultCode;
                                 }
                                 catch (Exception e)
                                 {
@@ -158,8 +167,12 @@ namespace Cimforce_HTTP_auto_script
                             case "upload nc file":
                                 try
                                 {
+                                    stream.Write(Encoding.ASCII.GetBytes("enter nc file name\n"), 0, Encoding.ASCII.GetBytes("enter nc file name\n").Length);
+                                    str_len = stream.Read(bytes, 0, bytes.Length);
+                                    socket_req = Encoding.ASCII.GetString(bytes, 0, str_len);
+
                                     var repo_ulnf = fcns.UploadLocalNCFile(name, sysnum, local_path, remote_path, nc_name, _cnc_client);
-                                    data = "execute function: upload nc file\n" + "result code: " + repo_ulnf.Result.ResultCode;
+                                    socket_repo = "execute function: upload nc file\n" + "result code: " + repo_ulnf.Result.ResultCode;
                                 }
                                 catch (Exception e)
                                 {
@@ -170,8 +183,12 @@ namespace Cimforce_HTTP_auto_script
                             case "specify nc file":
                                 try
                                 {
+                                    stream.Write(Encoding.ASCII.GetBytes("enter nc file name\n"), 0, Encoding.ASCII.GetBytes("enter nc file name\n").Length);
+                                    str_len = stream.Read(bytes, 0, bytes.Length);
+                                    socket_req = Encoding.ASCII.GetString(bytes, 0, str_len);
+
                                     var repo_snf = fcns.SpecifyNCFile(name, sysnum, remote_path, nc_name, _cnc_client);
-                                    data = "execute function: specify nc file\n" + "result code: " + repo_snf.Result.ResultCode;
+                                    socket_repo = "execute function: specify nc file\n" + "result code: " + repo_snf.Result.ResultCode;
                                 }
                                 catch (Exception e)
                                 {
@@ -183,7 +200,7 @@ namespace Cimforce_HTTP_auto_script
                                 try
                                 {
                                     var repo_cs = fcns.CycleStart(name, sysnum, nc_name, remote_path, _cnc_client);
-                                    data = "execute function: cycle start\n" + "result code: " + repo_cs.Result.ResultCode;
+                                    socket_repo = "execute function: cycle start\n" + "result code: " + repo_cs.Result.ResultCode;
                                 }
                                 catch (Exception e)
                                 {
@@ -192,10 +209,10 @@ namespace Cimforce_HTTP_auto_script
                                 break;
 
                             default:
-                                data = "undefined function\n";
+                                socket_repo = "undefined function\n";
                                 break;
                         }
-                        byte[] msg = Encoding.ASCII.GetBytes(data);
+                        byte[] msg = Encoding.ASCII.GetBytes(socket_repo);
                         stream.Write(msg, 0, msg.Length);
                     }
                     client.Close();
