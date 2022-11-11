@@ -25,7 +25,7 @@ namespace Cimforce_HTTP_auto_script
                 new Connect<Request_General, Response_StatusInfo>();
 
             //執行連線Task，依請求內容輸入(指令參數, URI路徑, Client)；返回JSON格式數據
-            return await status_info.ConnectTask(req_si, "statusInfo", client);
+            return await status_info.ConnectCNC(req_si, "statusInfo", client);
         }
 
         /*下載CNC加工檔 (限本地記憶體)**************************************************************************/
@@ -42,7 +42,7 @@ namespace Cimforce_HTTP_auto_script
             };
             Connect<Request_loadLocalNCFile, Response_General> download_nc_file =
                 new Connect<Request_loadLocalNCFile, Response_General>();
-            return await download_nc_file.ConnectTask(req_dlnf, "downloadNCFromMemory1", client);
+            return await download_nc_file.ConnectCNC(req_dlnf, "downloadNCFromMemory1", client);
         }
 
         /*刪除CNC加工檔 (限本地記憶體)**************************************************************************/
@@ -57,7 +57,7 @@ namespace Cimforce_HTTP_auto_script
             };
             Connect<Request_SpecifyNCFile, Response_General> delete_nc_file =
                 new Connect<Request_SpecifyNCFile, Response_General>();
-            return await delete_nc_file.ConnectTask(req_dnf, "deleteNCInMemory", client);
+            return await delete_nc_file.ConnectCNC(req_dnf, "deleteNCInMemory", client);
         }
 
         /*上傳PC加工檔 (限本地記憶體)***************************************************************************/
@@ -74,7 +74,7 @@ namespace Cimforce_HTTP_auto_script
             };
             Connect<Request_loadLocalNCFile, Response_General> upload_nc_file =
                 new Connect<Request_loadLocalNCFile, Response_General>();
-            return await upload_nc_file.ConnectTask(req_ulnf, "uploadNCToMemory1", client);
+            return await upload_nc_file.ConnectCNC(req_ulnf, "uploadNCToMemory1", client);
         }
 
         /*指定加工主程式****************************************************************************************/
@@ -90,7 +90,7 @@ namespace Cimforce_HTTP_auto_script
             };
             Connect<Request_SpecifyNCFile, Response_General> specify_nc_file =
                 new Connect<Request_SpecifyNCFile, Response_General>();
-            return await specify_nc_file.ConnectTask(req_snf, "setMainNC", client);
+            return await specify_nc_file.ConnectCNC(req_snf, "setMainNC", client);
         }
 
         /*開始加工**********************************************************************************************/
@@ -106,7 +106,7 @@ namespace Cimforce_HTTP_auto_script
             };
             Connect<Request_CycleStart, Response_General> cycle_start =
                 new Connect<Request_CycleStart, Response_General>();
-            return await cycle_start.ConnectTask(req_cs, "start", client);
+            return await cycle_start.ConnectCNC(req_cs, "start", client);
         }
 
         /*讀取刀具捕正******************************************************************************************/
@@ -122,7 +122,7 @@ namespace Cimforce_HTTP_auto_script
             };
             Connect<Request_ReadToolOofset, Response_ReadToolOofset> read_tool_offset =
                 new Connect<Request_ReadToolOofset, Response_ReadToolOofset>();
-            return await read_tool_offset.ConnectTask(req_rto, "getScopeToolOffsetInfo", client);
+            return await read_tool_offset.ConnectCNC(req_rto, "getScopeToolOffsetInfo", client);
         }
 
         /*寫入刀具捕正******************************************************************************************/
@@ -140,7 +140,7 @@ namespace Cimforce_HTTP_auto_script
             };
             Connect<Request_WriteToolOofset, Response_General> write_tool_offset =
                 new Connect<Request_WriteToolOofset, Response_General>();
-            return await write_tool_offset.ConnectTask(req_wto, "setScopeToolOffset", client);
+            return await write_tool_offset.ConnectCNC(req_wto, "setScopeToolOffset", client);
         }
 
         /*讀取PMC-Multi Addr***********************************************************************************/
@@ -155,7 +155,7 @@ namespace Cimforce_HTTP_auto_script
             };
             Connect<Request_ReadMultiPMC, Response_ReadMultiPMC> read_multi_pmc =
                 new Connect<Request_ReadMultiPMC, Response_ReadMultiPMC>();
-            return await read_multi_pmc.ConnectTask(req_rmp, "fanuc/readPMCInfo", client);
+            return await read_multi_pmc.ConnectCNC(req_rmp, "fanuc/readPMCInfo", client);
         }
 
         /*寫入PMC-Single Addr**********************************************************************************/
@@ -170,7 +170,7 @@ namespace Cimforce_HTTP_auto_script
             };
             Connect<Request_WriteSinglePMC, Response_General> write_single_pmc =
                 new Connect<Request_WriteSinglePMC, Response_General>();
-            return await write_single_pmc.ConnectTask(req_wsp, "fanuc/setPMCInfo2", client);
+            return await write_single_pmc.ConnectCNC(req_wsp, "fanuc/setPMCInfo2", client);
         }
 
         /*寫入PMC-Multi Addr***********************************************************************************/
@@ -185,7 +185,7 @@ namespace Cimforce_HTTP_auto_script
             };
             Connect<Request_WriteMultiPMC, Response_General> write_multi_pmc =
                 new Connect<Request_WriteMultiPMC, Response_General>();
-            return await write_multi_pmc.ConnectTask(req_wmp, "fanuc/setPMCInfo", client);
+            return await write_multi_pmc.ConnectCNC(req_wmp, "fanuc/setPMCInfo", client);
         }
 
         /*讀取MACRO********************************************************************************************/
@@ -201,7 +201,7 @@ namespace Cimforce_HTTP_auto_script
             };
             Connect<Request_ReadMacro, Response_ReadMacro> read_macro =
                 new Connect<Request_ReadMacro, Response_ReadMacro>();
-            return await read_macro.ConnectTask(req_rm, "fanuc/readMacro", client);
+            return await read_macro.ConnectCNC(req_rm, "fanuc/readMacro", client);
         }
 
         /*寫入MACRO********************************************************************************************/
@@ -216,7 +216,7 @@ namespace Cimforce_HTTP_auto_script
             };
             Connect<Request_WriteMacro, Response_General> write_macro =
                 new Connect<Request_WriteMacro, Response_General>();
-            return await write_macro.ConnectTask(req_wm, "fanuc/writeMacro", client);
+            return await write_macro.ConnectCNC(req_wm, "fanuc/writeMacro", client);
         }
     }
 }

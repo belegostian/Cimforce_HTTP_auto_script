@@ -1,17 +1,19 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
+using Newtonsoft.Json.Linq;
+
 namespace Cimforce_HTTP_auto_script
 {
     public class Connect<T, U>
     {
-        public async Task<U> ConnectTask(T req, string cmd_dir, HttpClient client)
+
+
+        public async Task<U> ConnectCNC(T req, string cmd_dir, HttpClient client)
         {
             using StringContent jsonContent = new(JsonSerializer.Serialize(req), Encoding.UTF8, "application/json");
             using HttpResponseMessage response = await client.PostAsync(cmd_dir, jsonContent);
