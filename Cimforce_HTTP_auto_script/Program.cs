@@ -208,6 +208,18 @@ namespace Cimforce_HTTP_auto_script
                                 }
                                 break;
 
+                            case "enforce cycle start":
+                                try
+                                {
+                                    var repo_wsp = fcns.WriteSinglePMC(name, sysnum, cycle_start, _cnc_client);
+                                    socket_repo = "execute function: enforce cycle start\n" + "result code: " + repo_wsp.Result.ResultCode;
+                                }
+                                catch (Exception e)
+                                {
+                                    Console.WriteLine("SocketException: {0}", e);
+                                }
+                                break;
+
                             default:
                                 socket_repo = "undefined function\n";
                                 break;
